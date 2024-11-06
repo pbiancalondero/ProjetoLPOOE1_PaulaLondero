@@ -24,7 +24,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_registroponto")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class RegistroPonto implements Serializable{
     
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

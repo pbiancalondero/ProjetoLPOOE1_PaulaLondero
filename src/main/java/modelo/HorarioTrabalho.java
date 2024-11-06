@@ -23,7 +23,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_horariotrab")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class HorarioTrabalho implements Serializable{
     
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

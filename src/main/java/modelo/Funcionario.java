@@ -26,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_funcionario")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Funcionario implements Serializable{
     
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
