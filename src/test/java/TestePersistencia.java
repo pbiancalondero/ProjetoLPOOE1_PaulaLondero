@@ -1,5 +1,7 @@
 
 import com.mycompany.projetolpooe1_paulalondero.dao.PersistenciaJPA;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import modelo.Departamento;
 import modelo.Ferias;
@@ -38,35 +40,49 @@ public class TestePersistencia {
     
     @Test
     public void testePersistencia() {
-        Funcionario funcionario = new Funcionario();
-        funcionario.setNome("Paula Londero");
-        funcionario.setCpf("123.456.789-00");
-        funcionario.setTipo(TipoFuncionario.DOCENTE);
-        funcionario.setDepartamento(Departamento.DOCENCIA);
+         HorarioTrabalho h = new HorarioTrabalho();
+        h.setDiasSemana("Segunda a Sexta");
+        h.setHoraInicio("08:00");
+        h.setHoraFim("17:00");
+        
+        Funcionario f = new Funcionario();
+        f.setMatricula("1234567");
+        f.setNome("Paula Londero");
+        f.setCpf("123.456.789-00");
+        f.setTipo(TipoFuncionario.DOCENTE);
+        f.setDepartamento(Departamento.DOCENCIA);
 
-        Ferias ferias = new Ferias();
-        ferias.setInicio(new Date());
-        ferias.setFim(new Date());
-        ferias.setFuncionario(funcionario);
-        funcionario.getFerias().add(ferias);
+        Ferias a = new Ferias();
+        a.setInicio(new Date());
+        a.setFim(new Date());
 
-        HorarioTrabalho horario = new HorarioTrabalho();
-        horario.setDiasSemana("Segunda a Sexta");
-        horario.setHoraInicio("08:00");
-        horario.setHoraFim("17:00");
-        horario.setFuncionario(funcionario);
-        funcionario.getHorariosTrabalho().add(horario);
+      
+        RegistroPonto r = new RegistroPonto();
 
-        RegistroPonto registro = new RegistroPonto();
-        registro.setData(new Date());
-        registro.setHora("08:30");
-        registro.setFuncionario(funcionario);
-        funcionario.getRegistrosPonto().add(registro);
+        // Definir a data e hora com LocalDateTime
+        LocalDateTime dataHora = LocalDateTime.now(); // Pega a data e hora atual
+        
+        // Caso queira definir uma hora específica como "08:30", use um formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String horaString = "08:30";
+        LocalDateTime dataHoraComHoraEspecifica = dataHora.withHour(Integer.parseInt(horaString.substring(0, 2)))
+                                                         .withMinute(Integer.parseInt(horaString.substring(3, 5)));
 
-        try {
-            jpa.persist(funcionario);
-        } catch (Exception e) {
-            System.err.println("Erro ao persistir funcionário: " + e.getMessage());
+        // Atribuindo a data e hora ao objeto
+        r.setDataHora(dataHoraComHoraEspecifica);
+
+
+        try{
+            jpa.persist(a);
+            jpa.persist(h);
+            jpa.persist(r); 
+            jpa.persist(f); 
+            
+            jpa.remover(f);
+            
+        } catch(Exception e){
+            System.err.println("Erro ao persistir funcionário: "+h);
         }
     }
+    
 }

@@ -5,7 +5,10 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +43,12 @@ public class Ferias implements Serializable{
     @ManyToOne
     @JoinColumn(name = "funcionario_id", nullable = false)
     private Funcionario funcionario;
+    
+    /*public Ferias(Date inicio, Date fim, Funcionario funcionario) {
+        this.inicio = inicio;
+        this.fim = fim;
+        this.funcionario = funcionario;
+    }*/
 
     public int getId() {
         return id;
@@ -64,9 +73,63 @@ public class Ferias implements Serializable{
     public void setFim(Date fim) {
         this.fim = fim;
     }
+    
+    public Funcionario getFuncionario() {
+    return funcionario;
+}
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
+    }
+    
+    @Override
+public String toString() {
+    // Definindo um formato de data padrão (exemplo: dd/MM/yyyy)
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    // Formatando as datas de início e fim
+    String dataInicio = (inicio != null) ? sdf.format(inicio) : "Data de início não definida";
+    String dataFim = (fim != null) ? sdf.format(fim) : "Data de fim não definida";
+
+    // Retornando a string com a informação formatada
+    return "" + funcionario.getNome() + " | " + dataInicio + " | " + dataFim;
+}
+
+
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + this.id;
+        hash = 61 * hash + Objects.hashCode(this.inicio);
+        hash = 61 * hash + Objects.hashCode(this.fim);
+        hash = 61 * hash + Objects.hashCode(this.funcionario);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ferias other = (Ferias) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.inicio, other.inicio)) {
+            return false;
+        }
+        if (!Objects.equals(this.fim, other.fim)) {
+            return false;
+        }
+      
+        return Objects.equals(this.funcionario, other.funcionario);
     }
     
     

@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,14 +33,23 @@ public class RegistroPonto implements Serializable{
     private int id;
     
     @Column(nullable = false)
-    private Date data;
+     private LocalDateTime dataHora;
     
-    @Column(nullable = false)
-    private String hora;
-    
+        
     @ManyToOne
     @JoinColumn(name = "funcionario_id", nullable = false)
     private Funcionario funcionario;
+    
+    public RegistroPonto() {
+    this.funcionario = null;
+    this.dataHora = null;
+}
+
+public RegistroPonto(Funcionario funcionario, LocalDateTime dataHora) {
+    this.funcionario = funcionario;
+    this.dataHora = dataHora;
+}
+
 
     public int getId() {
         return id;
@@ -49,24 +59,23 @@ public class RegistroPonto implements Serializable{
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+    
+    @Override
+public String toString() {
+    return "Registro de Ponto - " + funcionario.getNome() + " em " + dataHora.toString();
+}
+
     
 }
