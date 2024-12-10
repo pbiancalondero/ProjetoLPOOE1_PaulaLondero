@@ -125,7 +125,7 @@ public class TelaCadastroPonto extends javax.swing.JFrame {
         // Se o funcionário foi encontrado, crie o objeto Ponto
         RegistroPonto ponto = new RegistroPonto();
         ponto.setFuncionario(funcionario);  // Associe o funcionário ao ponto
-        ponto.setDataHora( LocalDateTime.now()); // Defina a data e hora do ponto
+        ponto.setDataHora( new Date()); 
 
         // Salve o ponto no banco de dados
         jpa.salvar(ponto);

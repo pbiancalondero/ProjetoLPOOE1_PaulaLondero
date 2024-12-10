@@ -60,16 +60,16 @@ public class TestePersistencia {
         RegistroPonto r = new RegistroPonto();
 
         // Definir a data e hora com LocalDateTime
-        LocalDateTime dataHora = LocalDateTime.now(); // Pega a data e hora atual
+        Date dataHora = new Date(); // Pega a data e hora atual
         
         // Caso queira definir uma hora específica como "08:30", use um formatter
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         String horaString = "08:30";
-        LocalDateTime dataHoraComHoraEspecifica = dataHora.withHour(Integer.parseInt(horaString.substring(0, 2)))
+        /*LocalDateTime dataHoraComHoraEspecifica = dataHora.withHour(Integer.parseInt(horaString.substring(0, 2)))
                                                          .withMinute(Integer.parseInt(horaString.substring(3, 5)));
 
         // Atribuindo a data e hora ao objeto
-        r.setDataHora(dataHoraComHoraEspecifica);
+        r.setDataHora(dataHoraComHoraEspecifica);*/
 
 
         try{

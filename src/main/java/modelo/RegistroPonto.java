@@ -32,8 +32,7 @@ public class RegistroPonto implements Serializable{
     @Id
     private int id;
     
-    @Column(nullable = false)
-     private LocalDateTime dataHora;
+     private Date dataHora;
     
         
     @ManyToOne
@@ -42,10 +41,10 @@ public class RegistroPonto implements Serializable{
     
     public RegistroPonto() {
     this.funcionario = null;
-    this.dataHora = null;
+    this.dataHora = new Date();
 }
 
-public RegistroPonto(Funcionario funcionario, LocalDateTime dataHora) {
+public RegistroPonto(Funcionario funcionario, Date dataHora) {
     this.funcionario = funcionario;
     this.dataHora = dataHora;
 }
@@ -59,11 +58,11 @@ public RegistroPonto(Funcionario funcionario, LocalDateTime dataHora) {
         this.id = id;
     }
 
-    public LocalDateTime getDataHora() {
+    public Date getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
+    public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
 
