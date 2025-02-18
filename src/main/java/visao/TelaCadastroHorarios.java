@@ -5,6 +5,12 @@
 package visao;
 
 import com.mycompany.projetolpooe1_paulalondero.dao.PersistenciaJPA;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Funcionario;
 import modelo.HorarioTrabalho;
 
@@ -22,7 +28,7 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jpa = new PersistenciaJPA();
-        loadFuncionarios();
+        carregarFuncionarios();
     }
 
     /**
@@ -39,16 +45,24 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
         lblInicio = new javax.swing.JLabel();
         lblFim = new javax.swing.JLabel();
         lblFuncionario = new javax.swing.JLabel();
-        txtDias = new javax.swing.JTextField();
         txtInicio = new javax.swing.JTextField();
         txtFim = new javax.swing.JTextField();
         cmbFuncionario = new javax.swing.JComboBox<>();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jCheckSeg = new javax.swing.JCheckBox();
+        jCheckTer = new javax.swing.JCheckBox();
+        jCheckQua = new javax.swing.JCheckBox();
+        jCheckQui = new javax.swing.JCheckBox();
+        jCheckSex = new javax.swing.JCheckBox();
+        jCheckSab = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Cadastro de Horários de Trabalho");
+        lblTitulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblDias.setText("Dias da semana:");
 
@@ -58,58 +72,90 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
 
         lblFuncionario.setText("Funcionário:");
 
+        btnSalvar.setBackground(java.awt.SystemColor.activeCaption);
+        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
 
+        jCheckSeg.setText("Seg");
+
+        jCheckTer.setText("Ter");
+
+        jCheckQua.setText("Qua");
+
+        jCheckQui.setText("Qui");
+
+        jCheckSex.setText("Sex");
+
+        jCheckSab.setText("Sab");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDias)
+                    .addComponent(lblInicio, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFim, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFuncionario, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblInicio)
-                            .addComponent(lblDias)
-                            .addComponent(lblFim)
-                            .addComponent(lblFuncionario))
+                        .addComponent(jCheckSeg)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDias)
-                            .addComponent(txtInicio)
-                            .addComponent(txtFim)
-                            .addComponent(cmbFuncionario, 0, 267, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(btnSalvar)
-                        .addGap(97, 97, 97)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jCheckTer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckQua)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckQui)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckSex)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckSab))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtInicio)
+                        .addComponent(txtFim)
+                        .addComponent(cmbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDias)
-                    .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckSeg)
+                    .addComponent(jCheckTer)
+                    .addComponent(jCheckQua)
+                    .addComponent(jCheckQui)
+                    .addComponent(jCheckSex)
+                    .addComponent(jCheckSab))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblInicio)
@@ -122,11 +168,11 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFuncionario)
                     .addComponent(cmbFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnCancelar))
-                .addGap(39, 39, 39))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,7 +183,76 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+    if (horario == null) {
+        horario = new HorarioTrabalho(); // Cria um novo horário, caso não exista
+    }
+
+    try {
+        // Pegando os dias da semana selecionados
+        List<String> diasSelecionados = new ArrayList<>();
+        if (jCheckSeg.isSelected()) diasSelecionados.add("Segunda-feira");
+        if (jCheckTer.isSelected()) diasSelecionados.add("Terça-feira");
+        if (jCheckQua.isSelected()) diasSelecionados.add("Quarta-feira");
+        if (jCheckQui.isSelected()) diasSelecionados.add("Quinta-feira");
+        if (jCheckSex.isSelected()) diasSelecionados.add("Sexta-feira");
+        if (jCheckSab.isSelected()) diasSelecionados.add("Sábado");
+
+        if (diasSelecionados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Selecione pelo menos um dia da semana.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Pegando funcionário selecionado
+        Funcionario funcionario = (Funcionario) cmbFuncionario.getSelectedItem();
+        if (funcionario == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um funcionário.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Pegando horários e validando
+        String horaInicio = txtInicio.getText().trim();
+        String horaFim = txtFim.getText().trim();
+
+        if (!horaInicio.matches("\\d{2}:\\d{2}") || !horaFim.matches("\\d{2}:\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Formato de horário inválido! Use HH:mm.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        LocalTime inicio = LocalTime.parse(horaInicio);
+        LocalTime fim = LocalTime.parse(horaFim);
+
+        if (fim.isBefore(inicio)) {
+            JOptionPane.showMessageDialog(this, "O horário de saída não pode ser antes do horário de entrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Configura valores no objeto HorarioTrabalho
+        horario.setDiasSemana(diasSelecionados);
+        horario.setHoraInicio(inicio);
+        horario.setHoraFim(fim);
+        horario.setFuncionario(funcionario);
+
+        // Salva no banco com transação
+        jpa.conexaoAberta();
+        jpa.getEntityManager().getTransaction().begin(); // Iniciar transação
+
+        // Se o horário já existir (não é novo), usa merge para atualizar
+        if (horario.getId() == null) {
+            jpa.persist(horario);  // Novo horário
+        } else {
+            jpa.getEntityManager().merge(horario);  // Atualiza horário existente
+        }
+
+        jpa.getEntityManager().getTransaction().commit(); // Confirma transação
+        jpa.fecharConexao();
+
+        JOptionPane.showMessageDialog(this, "Horário de trabalho cadastrado com sucesso!");
+        dispose();
+
+    } catch (Exception ex) {
+        // Em caso de erro, exibe a mensagem
+        JOptionPane.showMessageDialog(this, "Erro ao salvar horário de trabalho: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
@@ -182,29 +297,61 @@ public class TelaCadastroHorarios extends javax.swing.JDialog {
         });
     }
     
-    public void loadFuncionarios() {
-        cmbFuncionario.removeAllItems();
-        cmbFuncionario.addItem(null);
-        jpa.conexaoAberta();
-
-        for (Funcionario f : jpa.getFuncionarios()) {
-            cmbFuncionario.addItem(f);
-        }
-
-        jpa.fecharConexao();
+    public void carregarFuncionarios() {
+    cmbFuncionario.removeAllItems();
+    List<Funcionario> funcionarios = jpa.getFuncionarios();
+    
+    if (funcionarios == null || funcionarios.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nenhum funcionário encontrado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
     }
+
+    for (Funcionario item : funcionarios) {
+        cmbFuncionario.addItem(item);
+    }
+}
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<Funcionario> cmbFuncionario;
+    private javax.swing.JCheckBox jCheckQua;
+    private javax.swing.JCheckBox jCheckQui;
+    private javax.swing.JCheckBox jCheckSab;
+    private javax.swing.JCheckBox jCheckSeg;
+    private javax.swing.JCheckBox jCheckSex;
+    private javax.swing.JCheckBox jCheckTer;
     private javax.swing.JLabel lblDias;
     private javax.swing.JLabel lblFim;
     private javax.swing.JLabel lblFuncionario;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtDias;
     private javax.swing.JTextField txtFim;
     private javax.swing.JTextField txtInicio;
     // End of variables declaration//GEN-END:variables
+public HorarioTrabalho getHorarioTrabalho() {
+    return horario;
+}
+
+public void setHorarioTrabalho(HorarioTrabalho horarioTrabalho) {
+    this.horario = horarioTrabalho;
+
+    if (horarioTrabalho != null) {
+        txtInicio.setText(horarioTrabalho.getHoraInicio().toString());
+        txtFim.setText(horarioTrabalho.getHoraFim().toString());
+        cmbFuncionario.setSelectedItem(horarioTrabalho.getFuncionario());
+
+        // Marcar os checkboxes dos dias salvos
+        List<String> dias = horarioTrabalho.getDiasSemana();
+        jCheckSeg.setSelected(dias.contains("Segunda-feira"));
+        jCheckTer.setSelected(dias.contains("Terça-feira"));
+        jCheckQua.setSelected(dias.contains("Quarta-feira"));
+        jCheckQui.setSelected(dias.contains("Quinta-feira"));
+        jCheckSex.setSelected(dias.contains("Sexta-feira"));
+        jCheckSab.setSelected(dias.contains("Sábado"));
+    }
+}
 }

@@ -24,32 +24,30 @@ import javax.persistence.Table;
  *
  * @author paula
  */
-
 @Entity
 @Table(name = "tb_ferias")
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Ferias implements Serializable{
-    
+public class Ferias implements Serializable {
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
     private int id;
-    
+
     @Column(nullable = false)
     private Date inicio;
-    
+
     @Column(nullable = false)
     private Date fim;
-    
+
     @ManyToOne
     @JoinColumn(name = "funcionario_id", nullable = false)
     private Funcionario funcionario;
-    
+
     /*public Ferias(Date inicio, Date fim, Funcionario funcionario) {
         this.inicio = inicio;
         this.fim = fim;
         this.funcionario = funcionario;
     }*/
-
     public int getId() {
         return id;
     }
@@ -73,30 +71,28 @@ public class Ferias implements Serializable{
     public void setFim(Date fim) {
         this.fim = fim;
     }
-    
+
     public Funcionario getFuncionario() {
-    return funcionario;
-}
+        return funcionario;
+    }
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
+
     @Override
-public String toString() {
-    // Definindo um formato de data padrão (exemplo: dd/MM/yyyy)
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public String toString() {
+        // Definindo um formato de data padrão (exemplo: dd/MM/yyyy)
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    // Formatando as datas de início e fim
-    String dataInicio = (inicio != null) ? sdf.format(inicio) : "Data de início não definida";
-    String dataFim = (fim != null) ? sdf.format(fim) : "Data de fim não definida";
+        // Formatando as datas de início e fim
+        String dataInicio = (inicio != null) ? sdf.format(inicio) : "Data de início não definida";
+        String dataFim = (fim != null) ? sdf.format(fim) : "Data de fim não definida";
 
-    // Retornando a string com a informação formatada
-    return "" + funcionario.getNome() + " | " + dataInicio + " | " + dataFim;
-}
+        // Retornando a string com a informação formatada
+        return "" + funcionario.getNome() + " | " + dataInicio + " a " + dataFim;
+    }
 
-
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -128,9 +124,8 @@ public String toString() {
         if (!Objects.equals(this.fim, other.fim)) {
             return false;
         }
-      
+
         return Objects.equals(this.funcionario, other.funcionario);
     }
-    
-    
+
 }

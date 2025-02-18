@@ -57,7 +57,10 @@ public class TelaCadastroFerias extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Cadastro de Férias");
+        lblTitulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblInicio.setText("Data de início:");
 
@@ -65,14 +68,20 @@ public class TelaCadastroFerias extends javax.swing.JDialog {
 
         lblFuncionario.setText("Funcionário:");
 
+        btnSalvar.setBackground(java.awt.SystemColor.activeCaption);
+        btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
+        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -84,38 +93,35 @@ public class TelaCadastroFerias extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblInicio)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblInicio)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFim)
-                                    .addComponent(lblFuncionario))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtFim)
-                                    .addComponent(cmbMatricula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(btnSalvar)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFim)
+                            .addComponent(lblFuncionario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFim)
+                            .addComponent(cmbMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(58, Short.MAX_VALUE))
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(31, 31, 31)
                 .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblInicio)
                     .addComponent(txtInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,11 +133,11 @@ public class TelaCadastroFerias extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFuncionario)
                     .addComponent(cmbMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnCancelar))
-                .addContainerGap(65, Short.MAX_VALUE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,31 +145,52 @@ public class TelaCadastroFerias extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         if (ferias == null) {
-            ferias = new Ferias();
+        ferias = new Ferias();
+    }
+
+    try {
+        // Conversão das datas
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setLenient(false); // Impede datas inválidas (ex: 32/01/2024)
+
+        Date dataInicio = sdf.parse(txtInicio.getText());
+        Date dataFim = sdf.parse(txtFim.getText());
+        Date hoje = new Date();
+
+        // Validações das datas
+        if (dataInicio.before(hoje)) {
+            JOptionPane.showMessageDialog(this, "A data de início não pode ser anterior à data atual.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (dataFim.before(dataInicio)) {
+            JOptionPane.showMessageDialog(this, "A data de término não pode ser anterior à data de início.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        long diferencaDias = (dataFim.getTime() - dataInicio.getTime()) / (1000 * 60 * 60 * 24);
+        if (diferencaDias > 30) {
+            JOptionPane.showMessageDialog(this, "O período de férias não pode exceder 30 dias.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        try {
-            // Conversão das datas
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date dataInicio = sdf.parse(txtInicio.getText());
-            Date dataFim = sdf.parse(txtFim.getText());
+        // Configura os valores e salva no banco
+        ferias.setInicio(dataInicio);
+        ferias.setFim(dataFim);
+        ferias.setFuncionario((Funcionario) cmbMatricula.getSelectedItem());
 
-            ferias.setInicio(dataInicio);
-            ferias.setFim(dataFim);
-            ferias.setFuncionario((Funcionario) cmbMatricula.getSelectedItem());
+        jpa.conexaoAberta();
+        jpa.persist(ferias);
+        JOptionPane.showMessageDialog(this, "Férias cadastradas com sucesso!");
 
-            jpa.conexaoAberta();
-            jpa.persist(ferias);
-            JOptionPane.showMessageDialog(this, "Férias cadastradas com sucesso!");
-        } catch (Exception ex) {
-            Logger.getLogger(TelaCadastroFerias.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Erro ao salvar férias: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            jpa.fecharConexao();
-        }
+    } catch (DateTimeParseException ex) {
+        JOptionPane.showMessageDialog(this, "Formato de data inválido! Use dd/MM/yyyy.", "Erro", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+        Logger.getLogger(TelaCadastroFerias.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(this, "Erro ao salvar férias: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        jpa.fecharConexao();
+    }
 
-        dispose();
-    
+    dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

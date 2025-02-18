@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
@@ -72,9 +73,11 @@ public RegistroPonto(Funcionario funcionario, Date dataHora) {
     }
     
     @Override
-public String toString() {
-    return "Registro de Ponto - " + funcionario.getNome() + " em " + dataHora.toString();
-}
-
+    public String toString() {
+    // Definindo o formato para data e hora
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    // Formatando a dataHora e retornando a string com o nome do funcionário
+    return funcionario.getNome() + " - " + sdf.format(dataHora);
+    }
     
 }

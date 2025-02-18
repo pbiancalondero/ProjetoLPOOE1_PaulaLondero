@@ -43,13 +43,15 @@ public class TelaFerias extends javax.swing.JFrame {
         txtBuscaFuncionario = new javax.swing.JTextField();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstFerias = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Férias Cadastradas");
+        lblTitulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         lblFuncionario.setText("Funcionário:");
 
@@ -59,24 +61,23 @@ public class TelaFerias extends javax.swing.JFrame {
             }
         });
 
+        btnNovo.setBackground(new java.awt.Color(153, 255, 153));
+        btnNovo.setForeground(new java.awt.Color(0, 0, 0));
         btnNovo.setText("Novo");
+        btnNovo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
             }
         });
 
+        btnEditar.setBackground(java.awt.SystemColor.activeCaption);
+        btnEditar.setForeground(new java.awt.Color(0, 0, 0));
         btnEditar.setText("Editar");
+        btnEditar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnRemover.setText("Remover");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
             }
         });
 
@@ -87,33 +88,30 @@ public class TelaFerias extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnNovo)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnEditar)
-                        .addGap(61, 61, 61)
-                        .addComponent(btnRemover))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblFuncionario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                                .addComponent(txtBuscaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))))
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(26, 26, 26)
                 .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFuncionario)
                     .addComponent(txtBuscaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -121,10 +119,9 @@ public class TelaFerias extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnEditar)
-                    .addComponent(btnRemover))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,48 +155,25 @@ public class TelaFerias extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-    Ferias feriasSel = lstFerias.getSelectedValue();
-    if (feriasSel != null) {
-        System.out.println("Funcionário: " + feriasSel.getFuncionario());
-        try {
-            jpa.conexaoAberta();
-
-            // Confirmação de exclusão
-            int delOp = JOptionPane.showConfirmDialog(this,
-                    "Tem certeza que deseja remover " + feriasSel.getFuncionario().getNome() + "?");
-            if (delOp == JOptionPane.YES_OPTION) {
-                // Remover da persistência (base de dados)
-                jpa.remover(feriasSel);
-
-                // Atualizar a lista na interface gráfica após remoção
-                carregarFerias();  // Recarrega a lista de férias
-
-                JOptionPane.showMessageDialog(this, "Férias removidas com sucesso.");
-            }
-
-            jpa.fecharConexao();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,
-                    "Erro ao remover férias " + feriasSel + "\n" + e);
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Selecione para remover");
-    }
-    }//GEN-LAST:event_btnRemoverActionPerformed
-
     private void txtBuscaFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaFuncionarioKeyReleased
-         if(txtBuscaFuncionario.getText().trim().isEmpty()){
-            carregarFerias();
-        } else{
-            jpa.conexaoAberta();
-            DefaultListModel modeloLista = new DefaultListModel();
-            modeloLista.addAll(jpa.getFuncionarios(txtBuscaFuncionario.getText().trim()));
-            System.out.println("Funcinários carregados: "+jpa.getFuncionarios(txtBuscaFuncionario.getText().trim()));
-            lstFerias.setModel(modeloLista);
+    if (txtBuscaFuncionario.getText().trim().isEmpty()) {
+        carregarFerias(); // Recarrega todas as férias se a busca estiver vazia
+    } else {
+        jpa.conexaoAberta();
+        DefaultListModel<Ferias> modeloLista = new DefaultListModel<>();
+        
+        // Busca as férias pelo nome do funcionário
+        List<Ferias> feriasEncontradas = jpa.getFeriasPorFuncionario(txtBuscaFuncionario.getText().trim());
 
-            jpa.fecharConexao();
+        if (feriasEncontradas != null && !feriasEncontradas.isEmpty()) {
+            modeloLista.addAll(feriasEncontradas);
+        } else {
+            JOptionPane.showMessageDialog(this, "Nenhuma férias encontrada para esse funcionário.");
         }
+
+        lstFerias.setModel(modeloLista);
+        jpa.fecharConexao();
+    }
     }//GEN-LAST:event_txtBuscaFuncionarioKeyReleased
 
     /**
@@ -252,7 +226,6 @@ public class TelaFerias extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnRemover;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblFuncionario;
     private javax.swing.JLabel lblTitulo;

@@ -4,6 +4,8 @@
  */
 package com.mycompany.projetolpooe1_paulalondero.dao;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,20 +13,26 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import modelo.Departamento;
 import modelo.Ferias;
 import modelo.Funcionario;
+import modelo.HorarioTrabalho;
 import modelo.RegistroPonto;
 import modelo.TipoFuncionario;
+
 /**
  *
  * @author paula
  */
-public class PersistenciaJPA implements InterfaceBD{
-  EntityManager entity;
+public class PersistenciaJPA implements InterfaceBD {
+
+    EntityManager entity;
     EntityManagerFactory factory;
-    
+
     public PersistenciaJPA() {
         //parametro: é o nome da unidade de persistencia (Persistence Unit)
         factory
@@ -99,7 +107,7 @@ public class PersistenciaJPA implements InterfaceBD{
         }
         return entity;
     }
-    
+
     public List<Funcionario> getFuncionarios() {
         entity = getEntityManager();
 
@@ -145,7 +153,7 @@ public class PersistenciaJPA implements InterfaceBD{
         }
 
     }
-    
+
     public List<Funcionario> getFuncionarios(TipoFuncionario tipoSelecionado) {
         entity = getEntityManager();
 
@@ -161,36 +169,34 @@ public class PersistenciaJPA implements InterfaceBD{
         }
 
     }
-    
+
     //férias
     public List<Ferias> getFerias() {
-    EntityManager em = getEntityManager();
-    try {
-        TypedQuery<Ferias> query = em.createQuery("SELECT a FROM Ferias a ORDER BY a.inicio DESC", Ferias.class);
-        return query.getResultList();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Ferias> query = em.createQuery("SELECT a FROM Ferias a ORDER BY a.inicio DESC", Ferias.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-}
 
-   
     public Funcionario buscarFuncionarioPorMatriculaESenha(String matricula, String senha) {
-    // Implementação da consulta ao banco de dados para buscar o funcionário
-    // com base na matrícula e senha fornecidas
-    try {
-        // Usando o EntityManager de um método ou variável já existente
-        String query = "SELECT f FROM Funcionario f WHERE f.matricula = :matricula AND f.senha = :senha";
-        return getEntityManager().createQuery(query, Funcionario.class)
-                .setParameter("matricula", matricula)
-                .setParameter("senha", senha)
-                .getSingleResult();
-    } catch (Exception e) {
-        return null; // Caso não encontre o funcionário ou ocorra algum erro
+        // Implementação da consulta ao banco de dados para buscar o funcionário
+        // com base na matrícula e senha fornecidas
+        try {
+            // Usando o EntityManager de um método ou variável já existente
+            String query = "SELECT f FROM Funcionario f WHERE f.matricula = :matricula AND f.senha = :senha";
+            return getEntityManager().createQuery(query, Funcionario.class)
+                    .setParameter("matricula", matricula)
+                    .setParameter("senha", senha)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null; // Caso não encontre o funcionário ou ocorra algum erro
+        }
     }
-}
-    
-    
+
     public void salvar(RegistroPonto ponto) {
         try {
             entity.getTransaction().begin(); // Inicia a transação
@@ -202,64 +208,77 @@ public class PersistenciaJPA implements InterfaceBD{
         }
     }
 
-    
-    
-    public List<RegistroPonto> buscarTodosPontos() {
-    try {
-        String query = "SELECT r FROM RegistroPonto r";
-        return entity.createQuery(query, RegistroPonto.class).getResultList();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
-}
-
-public List<RegistroPonto> buscarPontosPorNome(String nome) {
-    try {
-        String query = "SELECT r FROM RegistroPonto r JOIN r.funcionario f WHERE f.nome LIKE :nome";
-        return entity.createQuery(query, RegistroPonto.class)
-                 .setParameter("nome", "%" + nome + "%")
-                 .getResultList();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
-}
-
-public List<RegistroPonto> buscarPontosPorMatricula(String matricula) {
-    try {
-        String query = "SELECT r FROM RegistroPonto r JOIN r.funcionario f WHERE f.matricula LIKE :matricula";
-        return entity.createQuery(query, RegistroPonto.class)
-                 .setParameter("matricula", "%" + matricula + "%")
-                 .getResultList();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
-}
-
-public void removerPonto(RegistroPonto ponto) {
-    try {
-        entity.getTransaction().begin();
-        entity.remove(entity.contains(ponto) ? ponto : entity.merge(ponto));
-        entity.getTransaction().commit();
-    } catch (Exception e) {
-        entity.getTransaction().rollback();
-        e.printStackTrace();
-    }
-}
-
     public List<RegistroPonto> getPontos() {
+        try {
+            String query = "SELECT r FROM RegistroPonto r"; // Consulta para obter todos os pontos
+            return entity.createQuery(query, RegistroPonto.class).getResultList(); // Executa a consulta e retorna a lista
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // Retorna uma lista vazia em caso de erro
+        }
+    }
+
+    public List<Ferias> getFeriasPorFuncionario(String nomeFuncionario) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Ferias> query = em.createQuery(
+                    "SELECT f FROM Ferias f WHERE LOWER(f.funcionario.nome) LIKE :nome ORDER BY f.inicio DESC",
+                    Ferias.class
+            );
+            query.setParameter("nome", "%" + nomeFuncionario.toLowerCase() + "%");
+            return query.getResultList();
+        } catch (Exception e) {
+            System.err.println("Erro ao buscar férias do funcionário: " + e);
+            return new ArrayList<>();
+        }
+    }
+
+    public void salvarHorarioTrabalho(HorarioTrabalho horario) {
+    EntityManager em = getEntityManager();
     try {
-        String query = "SELECT r FROM RegistroPonto r"; // Consulta para obter todos os pontos
-        return entity.createQuery(query, RegistroPonto.class).getResultList(); // Executa a consulta e retorna a lista
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().begin();
+        }
+
+        // Verifique se o funcionario está atribuído corretamente
+        if (horario.getFuncionario() == null) {
+            throw new IllegalArgumentException("Funcionário não atribuído!");
+        }
+
+        em.persist(horario);  // Persistir o objeto
+
+        em.getTransaction().commit();  // Commit da transação
+
     } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();  // Rollback em caso de erro
+        }
+        System.err.println("Erro ao persistir HorarioTrabalho: " + e.getMessage());
         e.printStackTrace();
-        return new ArrayList<>(); // Retorna uma lista vazia em caso de erro
+    } finally {
+        if (em.isOpen()) {
+            em.close();  // Fechar o EntityManager
+        }
     }
 }
 
 
-   
+
+
+public List<HorarioTrabalho> getHorarioTrabalho() {
+    EntityManager em = getEntityManager();
+    try {
+        return em.createQuery("SELECT h FROM HorarioTrabalho h ORDER BY h.horaInicio DESC", HorarioTrabalho.class)
+                 .getResultList();
+    } catch (Exception e) {
+        System.err.println("Erro ao buscar todos os horários: " + e.getMessage());
+        return new ArrayList<>();
+    } finally {
+        em.close();
+    }
+}
+
+
+
 
 }

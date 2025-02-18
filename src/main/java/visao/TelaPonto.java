@@ -40,139 +40,40 @@ public class TelaPonto extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
-        lblNome = new javax.swing.JLabel();
-        txtBuscaNome = new javax.swing.JTextField();
-        lblMatricula = new javax.swing.JLabel();
-        txtBuscaMatricula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPonto = new javax.swing.JList<>();
-        btnEditar = new javax.swing.JButton();
-        btnRemover = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Registros de Pontos Cadastrados");
-
-        lblNome.setText("Nome:");
-
-        txtBuscaNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscaNomeKeyReleased(evt);
-            }
-        });
-
-        lblMatricula.setText("Matrícula:");
-
-        txtBuscaMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscaMatriculaKeyReleased(evt);
-            }
-        });
+        lblTitulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jScrollPane1.setViewportView(lstPonto);
-
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnRemover.setText("Remover");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscaNome)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblMatricula)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(lblTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(btnEditar)
-                        .addGap(119, 119, 119)
-                        .addComponent(btnRemover)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(28, 28, 28)
                 .addComponent(lblTitulo)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(txtBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMatricula)
-                    .addComponent(txtBuscaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
-                    .addComponent(btnRemover))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-                                        
-        /*RegistroPonto pontoSelecionado = lstPonto.getSelectedValue();
-        if (pontoSelecionado != null) {
-            // Remover o ponto da base de dados
-            jpa.removerPonto(pontoSelecionado);
-            // Atualiza a lista
-            atualizarListaPontos();
-            JOptionPane.showMessageDialog(this, "Ponto removido com sucesso!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um ponto para remover.");
-        }
-    */
-    }//GEN-LAST:event_btnRemoverActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        /*RegistroPonto pontoSelecionado = lstPonto.getSelectedValue();
-        if (pontoSelecionado != null) {
-            // Abrir uma nova tela de edição ou configurar campos para edição (caso necessário)
-            new TelaCadastroPonto(pontoSelecionado).setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Selecione um ponto para editar.");
-        }*/
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void txtBuscaNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaNomeKeyReleased
-        String nome = txtBuscaNome.getText();
-        List<RegistroPonto> pontosFiltrados = jpa.buscarPontosPorNome(nome);
-        carregarPontos();
-    }//GEN-LAST:event_txtBuscaNomeKeyReleased
-
-    private void txtBuscaMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaMatriculaKeyReleased
-        String matricula = txtBuscaMatricula.getText();
-        List<RegistroPonto> pontosFiltrados = jpa.buscarPontosPorMatricula(matricula);
-        carregarPontos();
-    }//GEN-LAST:event_txtBuscaMatriculaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -227,14 +128,8 @@ public class TelaPonto extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnRemover;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblMatricula;
-    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<Funcionario> lstPonto;
-    private javax.swing.JTextField txtBuscaMatricula;
-    private javax.swing.JTextField txtBuscaNome;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,12 +1,16 @@
 
 import com.mycompany.projetolpooe1_paulalondero.dao.PersistenciaJPA;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Date;
+import javax.persistence.EntityManager;
 import modelo.Departamento;
 import modelo.Ferias;
 import modelo.Funcionario;
 import modelo.HorarioTrabalho;
+import static modelo.HorarioTrabalho_.funcionario;
 import modelo.RegistroPonto;
 import modelo.TipoFuncionario;
 import org.junit.After;
@@ -40,10 +44,7 @@ public class TestePersistencia {
     
     @Test
     public void testePersistencia() {
-         HorarioTrabalho h = new HorarioTrabalho();
-        h.setDiasSemana("Segunda a Sexta");
-        h.setHoraInicio("08:00");
-        h.setHoraFim("17:00");
+         
         
         Funcionario f = new Funcionario();
         f.setMatricula("1234567");
@@ -51,6 +52,12 @@ public class TestePersistencia {
         f.setCpf("123.456.789-00");
         f.setTipo(TipoFuncionario.DOCENTE);
         f.setDepartamento(Departamento.DOCENCIA);
+        
+        HorarioTrabalho h = new HorarioTrabalho();
+        //h.setFuncionario(funcionario);  // Certifique-se de que o funcionário não é null
+        h.setHoraInicio(LocalTime.of(8, 0));
+        h.setHoraFim(LocalTime.of(17, 0));
+        h.setDiasSemana(Arrays.asList("Segunda-feira", "Terça-feira"));
 
         Ferias a = new Ferias();
         a.setInicio(new Date());
@@ -70,7 +77,7 @@ public class TestePersistencia {
 
         // Atribuindo a data e hora ao objeto
         r.setDataHora(dataHoraComHoraEspecifica);*/
-
+        
 
         try{
             jpa.persist(a);
